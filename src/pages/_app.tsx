@@ -1,10 +1,19 @@
 import { queryClient } from "@/config/client";
 import "@/styles/globals.css";
+import { Oxygen } from "@next/font/google";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Fragment, useState } from "react";
 import { Hydrate, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+
+const oxygen = Oxygen({
+  style: ["normal"],
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  fallback: ["sans-serif"],
+  adjustFontFallback: true,
+});
 
 export default function App({ Component, pageProps: { dehydratedState, ...pageProps } }: AppProps) {
   const [client] = useState(() => queryClient);
@@ -20,7 +29,9 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
         <ReactQueryDevtools position="bottom-right" />
 
         <Hydrate state={dehydratedState}>
-          <Component {...pageProps} />
+          <main className={oxygen.className}>
+            <Component {...pageProps} />
+          </main>
         </Hydrate>
       </QueryClientProvider>
     </Fragment>

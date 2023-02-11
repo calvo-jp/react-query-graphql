@@ -10,6 +10,7 @@
     "codegen": "graphql-codegen --config .graphqlrc.js --project app1"
   },
   "dependencies": {
+    "@next/font": "^13.1.6",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
     "next": "13.1.6",
