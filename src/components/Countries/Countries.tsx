@@ -76,7 +76,7 @@ function Loader({ children = "Loading..." }: PropsWithChildren) {
   return (
     <p
       style={{
-        color: "vars(--colors-gray-light)",
+        color: "var(--colors-gray-light)",
         fontSize: "14px",
       }}
     >
