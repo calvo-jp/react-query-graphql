@@ -11,8 +11,6 @@ const oxygen = Oxygen({
   style: ["normal"],
   weight: ["400", "700"],
   subsets: ["latin"],
-  fallback: ["sans-serif"],
-  adjustFontFallback: true,
 });
 
 export default function App({ Component, pageProps: { dehydratedState, ...pageProps } }: AppProps) {
