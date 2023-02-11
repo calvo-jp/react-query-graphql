@@ -1,7 +1,11 @@
 import { GraphQLClient } from "graphql-request";
 import { QueryClient } from "react-query";
 
-export const graphqlClient = new GraphQLClient("https://countries.trevorblades.com", {
+const countriesApi = process.env.NEXT_PUBLIC_COUNTRIES_API;
+
+if (!countriesApi) throw new Error("Please set 'NEXT_PUBLIC_COUNTRIES_API' in your '.env'");
+
+export const graphqlClient = new GraphQLClient(countriesApi, {
   async requestMiddleware(request) {
     // get token here
 

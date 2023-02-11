@@ -1,8 +1,10 @@
+require("@next/env").loadEnvConfig(process.cwd());
+
 /** @type {import('graphql-config').IGraphQLConfig} */
 module.exports = {
   projects: {
     app1: {
-      schema: "https://countries.trevorblades.com",
+      schema: process.env.NEXT_PUBLIC_COUNTRIES_API,
       documents: "src/**/*.{gql,graphql}",
       extensions: {
         codegen: {
