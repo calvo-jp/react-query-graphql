@@ -38,7 +38,6 @@ export default function Country({ country }: Props) {
       {isLoading && <Loader />}
       {!isLoading && (
         <table
-          border={1}
           style={{
             marginTop: 24,
           }}
@@ -59,13 +58,12 @@ export default function Country({ country }: Props) {
 
 function Loader({ message = "Loading..." }: { message?: string }) {
   return (
-    <p
+    <small
       style={{
         color: "#71717a",
-        fontSize: "14px",
       }}
     >
       {message}
-    </p>
+    </small>
   );
 }

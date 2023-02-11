@@ -15,15 +15,10 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
       </Head>
 
       <style jsx global>{`
-        :root {
-          --colors-gray: #262626;
-          --colors-gray-light: #71717a;
-        }
-
         body {
           font-family: "Oxygen", sans-serif;
           background-color: white;
-          color: var(--colors-gray);
+          color: #262626;
         }
 
         *,
@@ -31,6 +26,7 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
         *::before {
           margin: 0px;
           padding: 0px;
+          box-sizing: border-box;
         }
 
         ul,
@@ -44,7 +40,21 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
         }
 
         td {
-          padding: 0.5rem 1rem;
+          border: 1px solid #d4d4d4;
+          padding: 0.65rem 1rem;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        a:hover {
+          color: #7c3aed;
+        }
+
+        small {
+          font-size: 14px;
         }
       `}</style>
 

@@ -36,16 +36,22 @@ export default function Countries() {
     >
       <Languages />
 
-      {isLoading && <Loader />}
-      {!isLoading && (
-        <ul>
-          {data?.countries.map(({ code, name }) => (
-            <li key={code}>
-              <Link href={`/${code}`}>{name}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div
+        style={{
+          marginTop: 14,
+        }}
+      >
+        {isLoading && <Loader />}
+        {!isLoading && (
+          <ul>
+            {data?.countries.map(({ code, name }) => (
+              <li key={code}>
+                <Link href={`/${code}`}>{name}</Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
@@ -59,14 +65,9 @@ function Languages() {
   });
 
   return (
-    <div
-      style={{
-        fontSize: "14px",
-        marginBottom: 16,
-      }}
-    >
+    <div>
       {isLoading && <Loader>Loading langs...</Loader>}
-      {!isLoading && <p>Languages: {data?.languages.length}</p>}
+      {!isLoading && <small>Languages: {data?.languages.length}</small>}
     </div>
   );
 }
@@ -74,13 +75,12 @@ function Languages() {
 // Stupid loader
 function Loader({ children = "Loading..." }: PropsWithChildren) {
   return (
-    <p
+    <small
       style={{
-        color: "var(--colors-gray-light)",
-        fontSize: "14px",
+        color: "#71717a",
       }}
     >
       {children}
-    </p>
+    </small>
   );
 }
