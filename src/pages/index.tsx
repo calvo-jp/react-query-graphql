@@ -1,3 +1,1 @@
-export default function Index() {
-  return null;
-}
+export { default, getServerSideProps } from "@/components/Landing/Landing";

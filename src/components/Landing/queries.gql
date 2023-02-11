@@ -1,0 +1,13 @@
+query Countries {
+  countries {
+    code
+    name
+  }
+}
+
+query Languages {
+  languages {
+    code
+    name
+  }
+}
