@@ -2,13 +2,14 @@
 // Countries are prerendered
 // Languages are fetched on client
 
-import { queryClient } from "@/config/client";
+import { graphqlClient, queryClient } from "@/config/client";
+import { getSdk } from "@/__generated__/graphql";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 import { dehydrate, useQuery } from "react-query";
-import { getCountries, getLanguages } from "./utils";
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  await queryClient.prefetchQuery(["countries"], getCountries);
+  await queryClient.prefetchQuery(["countries"], () => getSdk(graphqlClient).Countries());
 
   return {
     props: {
@@ -17,13 +18,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default function Index() {
+export default function Countries() {
   // prerendered
   // should no longer show loading
   // should not create a network request
   const { data, isLoading } = useQuery({
     queryKey: ["countries"],
-    queryFn: getCountries,
+    queryFn: () => getSdk(graphqlClient).Countries(),
     refetchOnMount: false,
   });
 
@@ -37,16 +38,13 @@ export default function Index() {
 
       {isLoading && <Loader />}
       {!isLoading && (
-        <pre
-          style={{
-            margin: 0,
-            padding: 24,
-            backgroundColor: "#f5f5f5",
-            maxWidth: "100%",
-          }}
-        >
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
+        <ul>
+          {data?.countries.map(({ code, name }) => (
+            <li key={code}>
+              <Link href={`/${code}`}>{name}</Link>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
@@ -54,11 +52,15 @@ export default function Index() {
 
 function Languages() {
   // not prerendered
-  // should display loading
-  const { data, isLoading } = useQuery({
-    queryFn: getLanguages,
+  // should create a network request
+  const { data } = useQuery({
     queryKey: "languages",
-    refetchOnMount: false,
+    queryFn: () => getSdk(graphqlClient).Languages(),
+    // with initialData but will be replaced
+    // because 'refetchOnMount' is true be default
+    initialData: {
+      languages: [],
+    },
   });
 
   return (
@@ -67,14 +69,13 @@ function Languages() {
         marginBottom: 16,
       }}
     >
-      {isLoading && <Loader message="Loading langs..." />}
-      {!isLoading && <p>Languages: {data?.length}</p>}
+      <p>Languages: {data?.languages.length}</p>
     </div>
   );
 }
 
 // Stupid loader
-function Loader({ message = "Loading..." }: { message?: string }) {
+function Loader() {
   return (
     <p
       style={{
@@ -82,7 +83,7 @@ function Loader({ message = "Loading..." }: { message?: string }) {
         fontSize: "14px",
       }}
     >
-      {message}
+      Loading...
     </p>
   );
 }

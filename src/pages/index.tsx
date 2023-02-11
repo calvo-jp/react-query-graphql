@@ -1,1 +1,1 @@
-export { default, getServerSideProps } from "@/components/Landing/Landing";
+export { default, getServerSideProps } from "@/components/Countries/Countries";

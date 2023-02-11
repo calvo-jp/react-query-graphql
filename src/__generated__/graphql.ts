@@ -141,6 +141,13 @@ export type LanguagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type LanguagesQuery = { __typename?: 'Query', languages: Array<{ __typename?: 'Language', code: string, name?: string | null }> };
 
+export type CountryQueryVariables = Exact<{
+  code: Scalars['ID'];
+}>;
+
+
+export type CountryQuery = { __typename?: 'Query', country?: { __typename?: 'Country', code: string, name: string, capital?: string | null, currency?: string | null, emoji: string } | null };
+
 
 export const CountriesDocument = /*#__PURE__*/ gql`
     query Countries {
@@ -158,6 +165,17 @@ export const LanguagesDocument = /*#__PURE__*/ gql`
   }
 }
     `;
+export const CountryDocument = /*#__PURE__*/ gql`
+    query Country($code: ID!) {
+  country(code: $code) {
+    code
+    name
+    capital
+    currency
+    emoji
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -171,6 +189,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     Languages(variables?: LanguagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<LanguagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<LanguagesQuery>(LanguagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Languages', 'query');
+    },
+    Country(variables: CountryQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CountryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CountryQuery>(CountryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Country', 'query');
     }
   };
 }
