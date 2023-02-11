@@ -44,7 +44,7 @@ export default function Country({ country }: Props) {
         >
           <tbody>
             {Object.entries(data?.country ?? {}).map(([key, value], idx) => (
-              <tr key={`${key}${value}${idx}`}>
+              <tr key={idx}>
                 <td>{key}</td>
                 <td>{value}</td>
               </tr>
