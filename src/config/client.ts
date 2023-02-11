@@ -15,4 +15,11 @@ export const graphqlClient = new GraphQLClient("https://countries.trevorblades.c
   },
 });
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      keepPreviousData: true,
+    },
+  },
+});

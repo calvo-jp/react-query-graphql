@@ -17,20 +17,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) 
 
   if (!country) return { notFound: true };
 
-  console.info("GSP running...");
-
-  return {
-    props: {
-      country,
-    },
-  };
+  return { props: { country } };
 };
 
 export default function Country({ country }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: ["country", country.code],
     queryFn: () => getSdk(graphqlClient).Country({ code: country.code }),
-    refetchOnMount: false,
     initialData: { country },
   });
 
@@ -48,14 +41,13 @@ export default function Country({ country }: Props) {
           border={1}
           style={{
             marginTop: 24,
-            borderCollapse: "collapse",
           }}
         >
           <tbody>
             {Object.entries(data?.country ?? {}).map(([key, value], idx) => (
               <tr key={`${key}${value}${idx}`}>
-                <td style={{ padding: "0.5rem 1rem" }}>{key}</td>
-                <td style={{ padding: "0.5rem 1rem" }}>{value}</td>
+                <td>{key}</td>
+                <td>{value}</td>
               </tr>
             ))}
           </tbody>

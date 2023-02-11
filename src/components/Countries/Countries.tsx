@@ -6,6 +6,7 @@ import { graphqlClient, queryClient } from "@/config/client";
 import { getSdk } from "@/__generated__/graphql";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
+import { PropsWithChildren } from "react";
 import { dehydrate, useQuery } from "react-query";
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -25,7 +26,6 @@ export default function Countries() {
   const { data, isLoading } = useQuery({
     queryKey: ["countries"],
     queryFn: () => getSdk(graphqlClient).Countries(),
-    refetchOnMount: false,
   });
 
   return (
@@ -53,29 +53,26 @@ export default function Countries() {
 function Languages() {
   // not prerendered
   // should create a network request
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: "languages",
     queryFn: () => getSdk(graphqlClient).Languages(),
-    // with initialData but will be replaced
-    // because 'refetchOnMount' is true be default
-    initialData: {
-      languages: [],
-    },
   });
 
   return (
     <div
       style={{
+        fontSize: "14px",
         marginBottom: 16,
       }}
     >
-      <p>Languages: {data?.languages.length}</p>
+      {isLoading && <Loader>Loading langs...</Loader>}
+      {!isLoading && <p>Languages: {data?.languages.length}</p>}
     </div>
   );
 }
 
 // Stupid loader
-function Loader() {
+function Loader({ children = "Loading..." }: PropsWithChildren) {
   return (
     <p
       style={{
@@ -83,7 +80,7 @@ function Loader() {
         fontSize: "14px",
       }}
     >
-      Loading...
+      {children}
     </p>
   );
 }
