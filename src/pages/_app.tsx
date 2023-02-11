@@ -31,8 +31,7 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
 
         ul,
         ol {
-          list-style: none;
-          padding: 0px;
+          list-style-position: inside;
         }
 
         table {
