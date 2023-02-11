@@ -42,13 +42,19 @@ export default function Country({ country }: Props) {
             marginTop: 24,
           }}
         >
+          <thead>
+            <tr>
+              {Object.keys(data?.country ?? {}).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
           <tbody>
-            {Object.entries(data?.country ?? {}).map(([key, value], idx) => (
-              <tr key={idx}>
-                <td>{key}</td>
-                <td>{value}</td>
-              </tr>
-            ))}
+            <tr>
+              {Object.values(data?.country ?? {}).map((val) => (
+                <td key={val}>{val}</td>
+              ))}
+            </tr>
           </tbody>
         </table>
       )}

@@ -12,6 +12,7 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
     <>
       <Head>
         <title>ReactQuery + GraphQL</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       <style jsx global>{`
@@ -38,7 +39,8 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
           border-collapse: collapse;
         }
 
-        td {
+        td,
+        th {
           border: 1px solid #d4d4d4;
           padding: 0.65rem 1rem;
         }
