@@ -15,10 +15,15 @@ export default function App({ Component, pageProps: { dehydratedState, ...pagePr
       </Head>
 
       <style jsx global>{`
+        :root {
+          --colors-gray: #262626;
+          --colors-gray-light: #71717a;
+        }
+
         body {
           font-family: "Oxygen", sans-serif;
           background-color: white;
-          color: #262626;
+          color: var(--colors-gray);
         }
 
         *,
