@@ -3,13 +3,13 @@ import { QueryClient } from "react-query";
 
 export const graphqlClient = new GraphQLClient("https://countries.trevorblades.com", {
   async requestMiddleware(request) {
-    const token = "";
+    // get token here
 
     return {
       ...request,
       headers: {
         ...request.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: "Bearer <token>",
       },
     };
   },
