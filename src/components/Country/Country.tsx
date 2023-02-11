@@ -3,6 +3,7 @@ import { CountryQuery, getSdk } from "@/__generated__/graphql";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useQuery } from "react-query";
+import ArrowLeftIcon from "./ArrowLeftIcon";
 
 type Props = {
   country: NonNullable<CountryQuery["country"]>;
@@ -33,7 +34,22 @@ export default function Country({ country }: Props) {
         padding: 24,
       }}
     >
-      <Link href="/">Go back</Link>
+      <Link
+        href="/"
+        style={{
+          gap: 6,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <ArrowLeftIcon
+          style={{
+            width: 18,
+            height: 18,
+          }}
+        />
+        <small>Go back</small>
+      </Link>
 
       {isLoading && <Loader />}
       {!isLoading && (
