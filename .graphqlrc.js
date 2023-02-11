@@ -1,9 +1,9 @@
 /** @type {import('graphql-config').IGraphQLConfig} */
 module.exports = {
   projects: {
-    project_0: {
+    app1: {
       schema: "https://countries.trevorblades.com",
-      documents: "src/**/*.{ts,tsx,gql,graphql}",
+      documents: "src/**/*.{gql,graphql}",
       extensions: {
         codegen: {
           generates: {
