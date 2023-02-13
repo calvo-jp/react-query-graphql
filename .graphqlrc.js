@@ -8,6 +8,7 @@ module.exports = {
     codegen: {
       generates: {
         "src/__generated__/graphql.ts": {
+          overwrite: true,
           plugins: [
             "typescript",
             "typescript-operations",
