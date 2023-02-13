@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "graphql-codegen --config .graphqlrc.js --project app1"
+    "codegen": "graphql-codegen --config .graphqlrc.js --project app1",
+    "prepare": "node scripts/generate-dotenv.js"
   },
   "dependencies": {
     "@next/font": "^13.1.6",
